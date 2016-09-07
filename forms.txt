@@ -1,0 +1,30 @@
+#For the form to delete a post
+
+Input parameters: sub, title, creator
+
+First you have to run this select query and save the result.
+It will be the argument in the subsaiddit spot (because we have to use id).
+
+SELECT id FROM subsaiddits WHERE title = "sub_title"
+
+then run this one with the sub_id (Note that sub_id is an integer)
+
+DELETE FROM posts WHERE
+subsaiddit = "sub" AND
+title = "title" AND
+creator = "creator"
+
+
+
+
+#For the form to create a post
+
+Input parameters: sub, title, creator, text, url(make null by default) 
+
+Same procedure here as above
+
+
+SELECT id FROM subsaiddits WHERE title = "sub_title"
+
+INSERT INTO posts (subsaiddit, title, creator, text, url)
+VALUES (sub, "title", "creator", "text", "url")

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Saiddit</title>
+
+    <!-- CSS Stylesheets -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+
+  <body style="background: #f2f2f2;">
+
+    <div class="banner"><div style="background:rgba(0,0,0,0.3); width:100%; height: 100%;"></div></div>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><span class="primaryWord">Saidd</span><span class="secondaryWord">it</span></a>
+        </div>
+        <div id="navbar">
+          <ul class="nav navbar-nav">
+			{{{post}}}
+            <li class = "active"><a href="/about">About</a></li>
+            {{{menu}}}
+          </ul>
+        </div>
+        {{{loginstatus}}}
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+          {{{error}}}
+          {{{success}}}
+          <h1>About Us</h1>
+          <p class="lead"> Who we are, and what we do </p>
+        </div>
+      </div>
+        
+        <div class = "row">
+        <div class="col-md-8 col-md-offset-2">
+            
+            <h3> WHO ARE WE? </h3>
+            <p> We are just two dudes that like to do super manly things like drink black coffee and chop down trees. Beards also an additional option for optimal manliness. </p>
+            <p> The manly dudes are also known as Wyll Brimacombe and Marcel 'The Beard' Bernard. </p>
+            
+            <h3> WHY SAIDDIT? </h3>
+            <p> Well we're making Saiddit cause Caleb Shortt is the great dude that asked us to! </p>
+            <p> He also enjoys coffee, beards, and other manly things. </p>
+            
+            </div>
+            
+        </div>
+
+    </div><!-- /.container -->
+
+    <!-- JS Scripts (Added at end of page so page visually loads faster) -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/sha512.js"></script>
+  </body>
+</html>

@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Saiddit</title>
+
+    <!-- CSS Stylesheets -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+
+  <body style="background: #f2f2f2;">
+
+    <div class="banner"><div style="background:rgba(0,0,0,0.3); width:100%; height: 100%;"></div></div>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><span class="primaryWord">Saidd</span><span class="secondaryWord">it</span></a>
+        </div>
+        <div id="navbar">
+          <ul class="nav navbar-nav">
+            {{{post}}}
+            <li><a href="/about">About</a></li>
+            {{{menu}}}
+          </ul>
+        </div>
+        {{{loginstatus}}}
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+          {{{error}}}
+          {{{success}}}
+          <h1>Saiddit</h1>
+          <p class="lead">Posts</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+		
+          <div class="col-md-1 extra-pad col-md-offset-2" >
+            <div class="panel panel-default text-center" style="height: 30px;" id="queryA">
+			  <h5>Query A</h5>
+            </div>
+			<input type="text" class="form-control" id="userA" name="userA" placeholder="User">
+          </div>
+		  
+          <div class="col-md-1 extra-pad">
+            <div class="panel panel-default text-center" style="height: 30px;" id="queryB">
+			  <h5>Query B</h5>
+            </div>
+			<input type="text" class="form-control" id="userB" name="userB" placeholder="User">
+		  </div>
+		  
+		  <div class="col-md-1 extra-pad">
+            <div class="panel panel-default text-center" style="height: 30px;" id="queryC">
+			  <h5>Query C</h5>
+            </div>
+			<input type="text" class="form-control" id="userC" name="userC" placeholder="User">
+		  </div>
+		  
+		  <div class="col-md-1 extra-pad">
+            <div class="panel panel-default text-center" style="height: 30px;" id="queryD">
+			  <h5>Query D</h5>
+            </div>
+			<input type="text" class="form-control" id="userD" name="userD" placeholder="User">
+		  </div>
+		  
+		  <div class="col-md-1 extra-pad">
+            <div class="panel panel-default text-center" style="height: 30px;" id="queryE">
+			  <h5>Query E</h5>
+            </div>
+			<input type="text" class="form-control" id="userE" name="userE" placeholder="User">
+		  </div>
+		  
+		  <div class="col-md-1 extra-pad">
+            <div class="panel panel-default text-center" style="height: 30px;" id="queryF">
+			  <h5>Query F</h5>
+            </div>
+			<input type="text" class="form-control" id="userF" name="userF" placeholder="User">
+		  </div>
+		  
+		  <div class="col-md-1 extra-pad">
+            <div class="panel panel-default text-center" style="height: 30px;" id="queryG">
+			  <h5>Query G</h5>
+            </div>
+			<input type="text" class="form-control" id="userG" name="userG" placeholder="Sub">
+		  </div>
+		  
+		  <div class="col-md-1 extra-pad">
+            <div class="panel panel-default text-center" style="height: 30px;" id="queryH">
+			  <h5>Query H</h5>
+            </div>
+			<input type="text" class="form-control" id="userH" name="userH" placeholder="Sub">
+			<input type="text" class="form-control" id="search" name="search" placeholder="Search">
+		  </div>
+		  
+		</div>
+	  </div>
+	  <div class="row">
+		<div class="col-md-8 col-md-offset-2" id="getFront">
+			<div class="table"> <!--
+			<table border="1" bordercolor="black" bgcolor="white" width="100%">
+			  <tr>
+				<th class="text-center">Rating</th>
+				<th class="text-center">Title</th>
+				<th class="text-center">Creator</th>
+			  </tr>
+			</table> -->
+			</div>
+		</div>
+	  </div>
+	</div><!-- /.container -->
+
+
+    <!-- JS Scripts (Added at end of page so page visually loads faster) -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/sha512.js"></script>
+    <script src="js/forms.js"></script>
+
+    <!-- Adds functionality for the interactive menu and hides later steps -->
+    <script>
+	
+		function makeTable(container, data) {
+			var table = $("<table class='col-md-8 col-md-offset-2' width='100%' id='table'/>");
+			$.each(data, function(rowIndex, r) {
+				var row = $("<tr/>");
+				$.each(r, function(colIndex, c) { 
+					row.append($("<t"+(rowIndex == 0 ?  "h" : "d")+"/>").text(c));
+				});
+				table.append(row);
+			});
+			return container.append(table);
+		}
+	
+		function appendTableColumn(table, rowData) {
+			var lastRow = $('<tr width="100%"/>').appendTo(table.find('tbody:last'));
+			$.each(rowData, function(colIndex, c) { 
+				lastRow.append($('<td/>').text(c));
+			});
+			return lastRow;
+		}
+	
+      $(document).ready(function(){
+	  
+		var data = [["City 1", "City 2", "City 3"]]
+		
+		var table = makeTable($(document.body), data);
+		
+		appendTableColumn(table, ["Calgary", "Ottawa", "Yellowknife"]);
+		
+		data.forEach(function(mom){
+			console.log(mom);
+		})
+		
+		$('table').empty();
+
+          // Handle panel clicks for game modes
+          $('#queryA').on('click', function(){
+            $.get("/queryA?data="+$('#userA').val(), function(data, textStatus, xhr){
+				$('table').empty();
+				var table = makeTable($(document.body), [['Rating','Title', 'Text', 'Creator']]);
+				data.forEach(function(swag){
+					appendTableColumn(table,[swag.rating,swag.title, swag.text ,swag.creator]);
+				})
+			}); 
+          });
+		  
+		  $('#queryB').on('click', function(){
+            $.get("/queryB?data="+$('#userB').val(), function(data, textStatus, xhr){
+				console.log(data);
+				$('table').empty();
+				var table = makeTable($(document.body), [['Rating','Title', 'Text', 'Creator']]);
+				data.forEach(function(swag) {
+					appendTableColumn(table,[swag.rating,swag.title, swag.text, swag.creator]);
+				})
+			}); 
+          });
+		  
+		  $('#queryC').on('click', function(){
+            $.get("/queryC?data="+$('#userC').val(), function(data, textStatus, xhr){
+				console.log(data);
+				$('table').empty();
+				var table = makeTable($(document.body), [['Title', 'Creator']]);
+				data.forEach(function(swag){
+					appendTableColumn(table,[swag.title, swag.creator]);
+				})
+			}); 
+          });
+		  
+		  $('#queryD').on('click', function(){
+            $.get("/queryD?data="+$('#userD').val(), function(data, textStatus, xhr){
+				console.log(data);
+				$('table').empty();
+				var table = makeTable($(document.body), [['Title', 'Text', 'Creator']]);
+				data.forEach(function(swag){
+					appendTableColumn(table,[swag.title, swag.text, swag.creator]);
+				})
+			}); 
+          });
+		  
+		  $('#queryE').on('click', function(){
+            $.get("/queryE?data="+$('#userE').val(), function(data, textStatus, xhr){
+				console.log(data);
+				$('table').empty();
+				var table = makeTable($(document.body), [['Title', 'Text', 'Creator']]);
+				data.forEach(function(swag){
+					appendTableColumn(table,[swag.title, swag.text, swag.creator]);
+				})
+			}); 
+          });
+		  
+		  $('#queryF').on('click', function(){
+            $.get("/queryF?data="+$('#userF').val(), function(data, textStatus, xhr){
+				console.log(data);
+				$('table').empty();
+				var table = makeTable($(document.body), [['Title', 'Creator']]);
+				data.forEach(function(swag){
+					appendTableColumn(table,[swag.title,swag.creator]);
+				})
+			}); 
+          });
+		  
+		  $('#queryG').on('click', function(){
+            $.get("/queryG?data="+$('#userG').val(), function(data, textStatus, xhr){
+				console.log(data);
+				$('table').empty();
+				var table = makeTable($(document.body), [['Title','Creator']]);
+				data.forEach(function(swag){
+					appendTableColumn(table,[swag.title, swag.creator]);
+				})
+			}); 
+          });
+		  
+		  $('#queryH').on('click', function(){
+            $.get("/queryH?data="+$('#userH').val()+","+$('#search').val(), function(data, textStatus, xhr){
+				console.log(data);
+				$('table').empty();
+				var table = makeTable($(document.body), [['Title','Text','Creator']]);
+				data.forEach(function(swag){
+					appendTableColumn(table,[swag.title,swag.text,swag.creator]);
+				})
+			}); 
+          });
+		  
+		  $('#table').ready( function(){
+			$.get("/getFront", function(data, textStatus, xhr){
+				console.log(data);
+				$('table').empty();
+				var table = makeTable($(document.body), [['Rating','Title','Creator']]);
+				if(data) {
+				data.forEach(function(swag) {
+					appendTableColumn(table,[swag.rating,swag.title,swag.creator]);
+				})
+				}
+			});
+		  });
+
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Saiddit</title>
+
+    <!-- CSS Stylesheets -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+
+    <script>
+      gameId = "{{{gameId}}}";
+    </script>
+
+  </head>
+
+  <body style="background: #f2f2f2;">
+
+    <div class="banner"><div style="background:rgba(0,0,0,0.3); width:100%; height: 100%;"></div></div>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><span class="primaryWord">Saidd</span><span class="secondaryWord">it</span></a>
+        </div>
+        <div id="navbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/post">Post Manager</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </div>
+        {{{loginstatus}}}
+      </div>
+    </nav>
+
+	<div class="container">
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+          {{{error}}}
+          {{{success}}}
+          <h1>Saiddit</h1>
+          <p class="lead">Posts</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+		
+          <div class="col-md-6 extra-pad" >
+
+            <!-- Create Panel -->
+            <div class="panel panel-default" style="height: 300px;" id="create">
+              <div class="panel-body text-center">
+                <span class="glyphicon glyphicon-edit" style="font-size:8em; color: #666; padding-top: 60px;"></span>
+				<h2>Create Post</h2>
+              </div>
+            </div>
+          </div>
+		  
+          <div class="col-md-6 extra-pad">
+
+            <!-- Delete panel -->
+            <div class="panel panel-default" style="height: 300px;" id="delete">
+              <div class="panel-body text-center">
+                <span class="glyphicon glyphicon-trash" style="font-size:8em; color: #666; padding-top: 60px;"></span>
+				<h2>Delete Post</h2>
+              </div>
+            </div>
+		  </div>
+		  
+        </div>
+      </div>
+	  
+    </div><!-- /.container -->
+	
+    <!-- Modals -->
+
+    <!-- Create Post modal -->
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Create Post</h4>
+          </div>
+          <!-- New post form -->
+		    <div class="modal-body">
+			  <div class="form-group">
+                <label for="sub">Subsaiddit</label>
+                <input type="text" id="sub" name="sub" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="sub">Title</label>
+                <input type="text" id="title" name="title" class="form-control" />
+              </div>
+			  <div class="form-group">
+                <label for="sub">Text</label>
+                <input type="text" id="text" name="text" class="form-control" />
+              </div>
+			  <div class="form-group">
+                <label for="sub">Creator</label>
+                <input type="text" id="creator" name="creator" class="form-control" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button id="submitPost" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            </div>
+          <!-- End creation form-->
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Post modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Delete Post</h4>
+          </div>
+          <!-- Post Deletion form -->
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="sub">Subsaiddit</label>
+                <input type="text" id="Dsub" name="sub" class="form-control" />
+              </div>
+			  <div class="form-group">
+                <label for="sub">Title</label>
+                <input type="text" id="Dtitle" name="title" class="form-control" />
+              </div>
+			  <div class="form-group">
+                <label for="sub">Creator</label>
+                <input type="text" id="Dcreator" name="creator" class="form-control" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button id="deletePost" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+            </div>
+          <!-- End creation form-->
+        </div>
+      </div>
+    </div>
+
+    <!-- JS Scripts (Added at end of page so page visually loads faster) -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/forms.js"></script>
+    <script src="/js/sha512.js"></script>
+	
+	<!-- Adds functionality for the interactive menu and hides later steps -->
+    <script>
+      $(document).ready(function(){
+	  
+          // Handle panel clicks for edit modes
+		  $('#delete').on('click', function(){
+            $('#deleteModal').modal();
+          });
+		  
+          $('#create').on('click', function(){
+            $('#createModal').modal();
+          });
+		  
+		  $('#submitPost').on('click', function(){
+            $.get("/newPost?data="+$('#sub').val()+","+$('#title').val()+","+$('#text').val()+","+$('#creator').val(), function(data, textStatus, xhr){
+				console.log(data);
+			}); 
+          });
+		  
+		  $('#deletePost').on('click', function(){
+            $.get("/deletePost?data="+$('#Dsub').val()+","+$('#Dtitle').val()+","+$('#Dcreator').val(), function(data, textStatus, xhr){
+				console.log(data);
+			}); 
+          });
+
+      });
+    </script>
+	
+  </body>
+</html>
