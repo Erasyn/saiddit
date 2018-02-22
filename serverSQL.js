@@ -13,11 +13,11 @@ mysql = require("mysql");
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "faart_faace1",
+	password: "",
 	database: "saiddit"
 });
 
-//SQL FUNCTIONS BABEEEEEEEEEEEEEEEEEEEEE
+//SQL FUNCTIONS
 
 /*******
 *
